@@ -9,14 +9,14 @@ WORKDIR /root
 ENV DEBIAN_FRONTEND noninteractive
 
 COPY config/apt/sources.list /etc/apt/sources.list
-RUN echo 'Acquire::http { Proxy "http://hadoop-apt-cache:3142"; };' >> /etc/apt/apt.conf.d/01proxy
+# RUN echo 'Acquire::http { Proxy "http://hadoop-apt-cache:3142"; };' >> /etc/apt/apt.conf.d/01proxy
 
-RUN apt-get update && apt-get -y install pv curl
+RUN apt-get update && apt-get -y install pv curl apt-utils
 
 # copy downloaded files and download new files
 COPY tarballs/* tarballs/
-COPY download.sh ./
-RUN bash download.sh
+# COPY download.sh ./
+# RUN bash download.sh
 
 RUN useradd -u 1500 -s /bin/bash -d /home/hadoop hadoop
 
@@ -44,7 +44,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 
 COPY config/apt/sources.list /etc/apt/sources.list
-RUN echo 'Acquire::http { Proxy "http://hadoop-apt-cache:3142"; };' >> /etc/apt/apt.conf.d/01proxy
+# RUN echo 'Acquire::http { Proxy "http://hadoop-apt-cache:3142"; };' >> /etc/apt/apt.conf.d/01proxy
 RUN echo "" > /etc/dpkg/dpkg.cfg.d/excludes
 
 RUN apt-get update && apt-get install -y apt-transport-https ca-certificates apt-utils man
