@@ -36,7 +36,7 @@ fi
 
 cp ${ZOOKEEPER_HOME}/conf/zoo.template.cfg ${ZOOKEEPER_HOME}/conf/zoo.cfg
 for ((i=1;i<=WORKER_NUMBER;i++)); do
-    echo "server.$i=hadoop-worker-$i:2888:3888" >> "${ZOOKEEPER_HOME}/conf/zoo.cfg"
+    echo "server.$i=hadoop-worker-$i:2888:3888;2181" >> "${ZOOKEEPER_HOME}/conf/zoo.cfg"
 done
 echo ${WORKER_ID} > ${ZOOKEEPER_HOME}/data/myid
 
